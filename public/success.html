@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Payment Successful</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f4f4f4;
+      margin: 0;
+      padding: 20px;
+    }
+    .container {
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 20px;
+      background-color: #ffffff;
+      border-radius: 8px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+    h1 {
+      color: #333;
+      text-align: center;
+    }
+    .order-details {
+      border-top: 2px solid #333;
+      padding-top: 20px;
+    }
+    .order-details p {
+      margin: 10px 0;
+      font-size: 16px;
+      color: #555;
+    }
+    .missing-info {
+      margin-top: 20px;
+      padding: 20px;
+      border: 1px solid #ddd;
+      border-radius: 8px;
+      background-color: #f9f9f9;
+    }
+    .missing-info input {
+      display: block;
+      margin: 10px 0;
+      padding: 10px;
+      width: 100%;
+      border: 1px solid #ddd;
+      border-radius: 4px;
+    }
+    .missing-info button {
+      padding: 10px 20px;
+      background-color: #28a745;
+      color: #fff;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+    .missing-info button:hover {
+      background-color: #218838;
+    }
+    .print-button {
+      margin-top: 20px;
+      display: block;
+      padding: 10px 20px;
+      background-color: #007bff;
+      color: #fff;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+      text-align: center;
+    }
+    .print-button:hover {
+      background-color: #0056b3;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Payment Successful!</h1>
+    <p>Your payment was successful. Thank you for your purchase!</p>
+    <div class="order-details">
+      <h2>Order Details:</h2>
+      <p id="order-summary"></p>
+    </div>
+    <div id="missing-info" class="missing-info" style="display: none;">
+      <h2>We need some more information from you:</h2>
+      <form id="info-form">
+        <label for="name">Full Name:</label>
+        <input type="text" id="name" name="name" required>
+        <label for="email">Email:</label>
+        <input type="email" id="email" name="email" required>
+        <button type="submit">Submit</button>
+      </form>
+    </div>
+    <button class="print-button" id="print-button" style="display: none;">Print Receipt</button>
+  </div>
+
+  <script>
+    let initialOrderDetails = {};
+
+    async function fetchOrderDetails() {
+      const params = new URLSearchParams(window.location.search);
+      const sessionId = params.get('session_id');
+
+      if (!sessionId) {
+        document.getElementById('order-summary').innerText = 'No session ID found.';
+        return;
+      }
+
+      const response = await fetch(`/order-details?session_id=${sessionId}`);
+      const data = await response.json();
+      
+      if (data.error) {
+        document.getElementById('order-summary').innerText = data.error;
+      } else {
+        initialOrderDetails = data; // Store initial details
+        document.getElementById('order-summary').innerHTML = `
+          <p><strong>Order ID:</strong> ${data.id}</p>
+          <p><strong>Customer:</strong> ${data.customer_name || 'N/A'}</p>
+          <p><strong>Email:</strong> ${data.customer_email}</p>
+          <p><strong>Total Amount:</strong> $${data.amount_total / 100}</p>
+          <p><strong>Payment Status:</strong> ${data.payment_status}</p>
+        `;
+
+        if (data.isCustomerDataMissing) {
+          document.getElementById('missing-info').style.display = 'block';
+        } else {
+          document.getElementById('print-button').style.display = 'block';
+        }
+      }
+    }
+
+    async function updateOrderDetails(name, email) {
+      const orderSummary = document.getElementById('order-summary');
+      orderSummary.innerHTML = `
+        <p><strong>Order ID:</strong> ${initialOrderDetails.id}</p>
+        <p><strong>Customer:</strong> ${name}</p>
+        <p><strong>Email:</strong> ${email}</p>
+        <p><strong>Total Amount:</strong> $${initialOrderDetails.amount_total / 100}</p>
+        <p><strong>Payment Status:</strong> ${initialOrderDetails.payment_status}</p>
+      `;
+    }
+
+    document.getElementById('info-form')?.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const name = document.getElementById('name').value;
+      const email = document.getElementById('email').value;
+
+      // Handle form submission to save the additional information
+      await fetch('/submit-customer-info', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ name, email })
+      });
+
+      // Update the displayed customer information
+      updateOrderDetails(name, email);
+
+      alert('Thank you for providing your details.');
+      document.getElementById('print-button').style.display = 'block';
+    });
+
+    document.getElementById('print-button')?.addEventListener('click', () => {
+      // Print only the receipt part
+      const printWindow = window.open('', '', 'height=600,width=800');
+      printWindow.document.write('<html><head><title>Print Receipt</title>');
+      printWindow.document.write('</head><body >');
+      printWindow.document.write(document.querySelector('.container').innerHTML);
+      printWindow.document.write('</body></html>');
+      printWindow.document.close();
+      printWindow.focus();
+      printWindow.print();
+    });
+
+    fetchOrderDetails();
+  </script>
+</body>
+</html>
