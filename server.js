@@ -43,8 +43,8 @@ app.post('/create-checkout-session', async (req, res) => {
         quantity: 1,
       }],
       mode: 'payment',
-      success_url: 'http://localhost:3000/success.html?session_id={CHECKOUT_SESSION_ID}',
-      cancel_url: 'http://localhost:3000/cancel.html',
+      success_url: 'https://tezzwatchess.onrender.com/success.html?session_id={CHECKOUT_SESSION_ID}',
+      cancel_url: 'https://tezzwatchess.onrender.com/cancel.html',
     });
 
     res.json({ id: session.id });
