@@ -2,10 +2,9 @@
 
 **A responsive e-commerce website for luxury and casual watches, integrated with Stripe payments and invoice generation.**
 
-[Watch the demo on YouTube](https://youtu.be/0GT6yF3r10Q)
+[Watch the demo video](https://drive.google.com/file/d/1BcNAbkRjvn4KWJKjqqtrcGls1KXl5lqf/view?usp=sharing)
 
 ---
-
 
 ## Project Overview
 
