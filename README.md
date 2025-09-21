@@ -96,7 +96,7 @@ http://localhost:3000
 1. Browse watches on the **Home** and **New** pages.  
 2. Click **Buy** to add a product to Stripe Checkout.  
 3. Complete the payment.  
-4. On the **success page**, view order details or provide missing info.  
+4. On the **success page**, view order details or provide missing information.  
 5. Download or print the PDF invoice.
 
 ---
