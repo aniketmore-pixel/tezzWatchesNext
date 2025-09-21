@@ -92,13 +92,13 @@ http://localhost:3000
 ## Screenshots
 
 **Homepage with Featured Product Slider:**  
-![Homepage Preview](preview.png)  
+<img width="960" height="540" alt="image" src="https://github.com/user-attachments/assets/76e71926-68e9-4915-ac9e-4d5059723b7c" />
 
 **New Watches Page with Product Cards:**  
-![New Page Preview](preview.png) *(replace with actual screenshot)*  
+<img width="960" height="540" alt="image" src="https://github.com/user-attachments/assets/0d685d90-8541-4a8f-bdaa-86622a988693" />
 
 **Payment Success Page:**  
-![Payment Success](preview.png) *(replace with actual screenshot)*  
+<img width="960" height="540" alt="image" src="https://github.com/user-attachments/assets/3a792308-3161-40f0-ae0f-039fc069f664" />
 
 ---
 
