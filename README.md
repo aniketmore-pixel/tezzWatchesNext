@@ -5,6 +5,18 @@
 [Watch the demo video](https://drive.google.com/file/d/1BcNAbkRjvn4KWJKjqqtrcGls1KXl5lqf/view?usp=sharing)
 
 ---
+## Screenshots
+
+**Homepage with Featured Product Slider:**  
+<img width="960" height="540" alt="image" src="https://github.com/user-attachments/assets/76e71926-68e9-4915-ac9e-4d5059723b7c" />
+
+**New Watches Page with Product Cards:**  
+<img width="960" height="540" alt="image" src="https://github.com/user-attachments/assets/0d685d90-8541-4a8f-bdaa-86622a988693" />
+
+**Payment Success Page:**  
+<img width="960" height="540" alt="image" src="https://github.com/user-attachments/assets/3a792308-3161-40f0-ae0f-039fc069f664" />
+
+---
 
 ## Project Overview
 
@@ -89,18 +101,7 @@ http://localhost:3000
 
 ---
 
-## Screenshots
 
-**Homepage with Featured Product Slider:**  
-<img width="960" height="540" alt="image" src="https://github.com/user-attachments/assets/76e71926-68e9-4915-ac9e-4d5059723b7c" />
-
-**New Watches Page with Product Cards:**  
-<img width="960" height="540" alt="image" src="https://github.com/user-attachments/assets/0d685d90-8541-4a8f-bdaa-86622a988693" />
-
-**Payment Success Page:**  
-<img width="960" height="540" alt="image" src="https://github.com/user-attachments/assets/3a792308-3161-40f0-ae0f-039fc069f664" />
-
----
 
 ## Folder Structure
 
